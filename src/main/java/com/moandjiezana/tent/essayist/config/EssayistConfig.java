@@ -1,6 +1,6 @@
 package com.moandjiezana.tent.essayist.config;
 
-import fj.data.Option;
+import com.google.common.base.Optional;
 
 import java.util.Properties;
 
@@ -29,17 +29,17 @@ public class EssayistConfig {
         return properties.getProperty("essayist.defaultLicense", "http://creativecommons.org/licenses/by/3.0/");
     }
 
-    public String getBaseDomain(String defaulDomain) {
-        return properties.getProperty(BASE_DOMAIN, defaulDomain);
+    public String getBaseDomain(String defaultDomain) {
+        return properties.getProperty(BASE_DOMAIN, defaultDomain);
     }
 
-    public Option<String> getDefaultEntity(){
+    public Optional<String> getDefaultEntity(){
         String defaultEntity = properties.getProperty(DEFAULT_ENTITY);
-        return Option.fromString(defaultEntity);
+        return Optional.of(defaultEntity);
     }
 
     public boolean isDefaultEntity(String entity){
-        Option<String> defaultEntity = getDefaultEntity();
-        return defaultEntity.isSome() && defaultEntity.some().equals(entity);
+      Optional<String> defaultEntity = getDefaultEntity();
+        return defaultEntity.or("").equals(entity);
     }
 }
